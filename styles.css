@@ -1,0 +1,960 @@
+/* ── 全体設定 ── */
+:root {
+  --primary-color: #FF6B6B;
+  --secondary-color: #4ECDC4;
+  --dark-color: #2C3E50;
+  --light-color: #ECF0F1;
+  --text-color: #333;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ページ全体の固定背景画像 */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("../img/背景.JPG") no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── ヘッダー ── */
+.site-header {
+  background-color: rgba(18, 18, 19, 0.95);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px 10%;
+}
+
+.site-header .logo img {
+  height: 50px;
+  width: auto;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+/* PC時のナビ */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+/* ヘッダーのコンテナ設定 */
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ハンバーガーメニュー（初期は非表示） */
+.hamburger {
+  display: none;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* ハンバーガーのバー */
+.hamburger .bar {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  border-radius: 3px;
+}
+
+/* 768px以下（スマホ）用 */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgba(18, 18, 19, 0.95);
+    position: absolute;
+    top: 70px; /* ヘッダーの高さに合わせる */
+    right: 0;  /* 右側から出す */
+    padding: 1rem 0;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+  /* ハンバーガーメニューを右側に表示 */
+  .hamburger {
+    display: flex;
+  }
+}
+
+
+
+/* ── ヒーローセクション ── */
+.hero {
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background: url("../img/main%20contents.png") no-repeat center center;
+  background-size: cover;
+  
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 1s ease-in-out;
+}
+
+.hero h1 {
+  font-size: 48px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.hero .highlight {
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+/* 親要素（アニメーション対象） */
+.hero-heading {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(50px) scale(0.8) rotate(-2deg);
+  animation: heroZoomIn 2s ease forwards;
+  animation-delay: 0.5s;
+}
+
+/* 子要素（常にグラデーションテキストのスタイルを維持） */
+.hero-heading-text {
+  font-family: 'Lobster', cursive;
+  font-size: 4rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  background: linear-gradient(45deg, #6d6de6, #fffffff6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transform: rotate(-2deg); /* 親の回転と合わせる */
+}
+
+/* キーフレームは親要素に適用 */
+@keyframes heroZoomIn {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.8) rotate(-2deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.1) rotate(-2deg);
+  }
+  80% {
+    transform: translateY(5px) scale(0.95) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(-2deg);
+  }
+}
+
+
+.cta-button {
+  padding: 12px 24px;
+  background-color: var(--primary-color);
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.cta-button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* ── コンテンツセクション共通 ── */
+.content-section {
+  padding: 60px 10%;
+  text-align: center;
+  background-color: rgba(249, 249, 249, 0.9);
+}
+
+.content-section:nth-of-type(even) {
+  background-color: #fff; /* 普通の白 */
+}
+
+/* 偶数セクションは白背景に（必要ならコメントアウト） */
+/* .content-section:nth-of-type(even) {
+  background-color: #fff;
+} */
+
+.section-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+  animation: slideIn 1s ease;
+}
+
+.content-section p {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+/* ── Aboutセクション ── */
+#about {
+  text-align: center;
+}
+
+.cta-button {
+  /* ボタンの基本デザイン */
+  display: inline-block;
+  padding: 1em 2em;
+  background-color: #28a745;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  position: relative;
+  cursor: pointer;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+/* 基本設定（PC・タブレット共通） */
+#about img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto 0;
+}
+
+/* スマホ用の微調整 */
+@media (max-width: 768px) {
+  #about img {
+    margin: 10px auto; /* 余白を少し狭める */
+    /* 必要なら width: 100%; を指定してもOK */
+  }
+}
+
+#about img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 20px auto 0;
+}
+
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+.feature {
+  background-color: #DDDD;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+.feature:hover {
+  transform: translateY(-10px);
+}
+.feature i {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+}
+.feature h3 {
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .feature {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+/* 料金セクション全体 */
+.pricing-section {
+  padding: 60px 0;
+  background-color: #fff; /* 背景色はお好みで */
+  text-align: center;
+}
+
+.pricing-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pricing-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* 上段：3つのプランの横並び */
+.top-row {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap; /* 画面が狭い時は折り返し */
+  margin-bottom: 2rem;
+}
+
+/* プラン共通スタイル */
+.plan {
+  background: #DDDD; /* 左右プランのデフォルト背景 */
+  border: 1px solid #eee;
+  border-radius: 8px;
+  width: 300px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+/* おすすめプラン（中央） */
+.plan-center {
+  background: #ff3b2b; /* お好みの赤系カラー */
+  color: #fff;
+}
+
+/* おすすめバッジ */
+.badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: #333; 
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+/* プラン名、価格、1回あたり */
+.plan h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+.plan-price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.plan-per {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* 中央プランの文字色を白に統一 */
+.plan-center h3,
+.plan-center .plan-price,
+.plan-center .plan-per {
+  color: #fff;
+}
+
+/* 中段・下段：大きなボックス（縦並び） */
+.wide-box {
+  background: #DDDD;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 800px; /* お好みで調整 */
+  margin: 0 auto 20px; /* 下に余白 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.wide-box h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+.wide-box p {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .plan {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+/* トレーナーセクションの基本 */
+
+
+/* スライダー全体のコンテナ */
+.trainer-slider {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+/* 各カードを横に並べる or 重ねる（今回1枚だけ表示するので重ねる想定） */
+.trainer-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex; /* 左側: 画像, 右側: テキスト */
+  gap: 20px;
+  opacity: 0;   /* 初期は非表示 */
+  transition: opacity 0.5s ease;
+  /* カードの高さは中身に合わせるなら position: absolute のままだと
+     親コンテナに高さがなくなるので、JSで高さを調整するか、
+     あるいは固定高さにするなど工夫が必要 */
+}
+
+/* アクティブなカードのみ表示 */
+.trainer-card.active {
+  opacity: 1;
+  position: relative; /* activeなものだけ relative にして高さを持たせる */
+}
+
+/* 画像とテキストのレイアウト */
+.trainer-image {
+  flex: 0 0 300px; /* 画像枠の幅 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.trainer-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.trainer-info {
+  flex: 1;
+  background: #f4f4f4;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ページネーション */
+.trainer-nav {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+#trainer-count {
+  font-size: 16px;
+  font-weight: bold;
+}
+.nav-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  border: none;
+  background: #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.nav-btn:hover {
+  background: #ccc;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .trainer-card {
+    flex-direction: column; /* 縦並び */
+    text-align: center;
+  }
+  .trainer-image {
+    flex: none;
+    width: 100%;
+    max-height: 200px; /* 画像の高さ上限 */
+  }
+}
+
+/* ── 成功事例（お客様の声） ── */
+.testimonials-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.testimonial-card {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  width: 320px;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.testimonial-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.testimonial-text {
+  text-align: left;
+  width: 100%;
+}
+
+.testimonial-text p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.testimonial-text h4 {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+/* フローセクション全体 */
+.flow-section {
+  background: #fff;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.flow-section .container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+/* 全ステップを縦に並べるコンテナ */
+.flow-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* 各ステップの枠 */
+.flow-step {
+  display: flex;
+  justify-content: space-between; /* 左テキスト、右画像を両端に配置 */
+  gap: 20px;
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: left; /* 左寄せ */
+}
+
+/* 左側（アイコン＋テキスト） */
+.step-left {
+  display: flex;
+  gap: 20px; /* アイコンとテキストの間 */
+  align-items: flex-start; 
+  flex: 1; /* 画像を含めた全体のバランスをとる */
+}
+
+/* アイコン */
+.step-icon {
+  font-size: 2rem;
+  color: #ff6b6b; /* お好みのアクセントカラー */
+  flex-shrink: 0;
+}
+
+/* テキスト部分 */
+.step-content {
+  text-align: left;
+}
+
+.step-content h3 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.step-content p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* 右側：画像 */
+.step-image {
+  flex: 0 0 200px; /* 画像枠の幅（お好みで調整） */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* 矢印用の要素 */
+.flow-arrow {
+  text-align: center;
+  font-size: 2rem;
+  color: #ccc;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .flow-step {
+    flex-direction: column;
+    text-align: center;
+  }
+  .step-left {
+    flex-direction: column;
+    align-items: center;
+  }
+  .step-icon {
+    margin-bottom: 10px;
+  }
+  .step-content {
+    text-align: center;
+  }
+  .step-image {
+    width: 100%;
+    max-width: 300px;
+    margin-top: 15px;
+  }
+  .flow-arrow {
+    font-size: 2rem;
+    margin: -20px 0; /* 矢印の位置を微調整 */
+  }
+}
+
+/* FAQセクション */
+#faq {
+  background-color: #f9f9f9;
+  padding: 60px 0;
+}
+
+.faq-list {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* FAQアイテム */
+.faq-item {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* 質問部分 */
+.faq-question {
+  padding: 15px 20px;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 回答部分（初期は非表示） */
+.faq-answer {
+  padding: 15px 20px;
+  display: none;
+  font-size: 0.95rem;
+  color: #333;
+  border-top: 1px solid #ddd;
+}
+
+/* FAQアイテムが展開されている状態 */
+.faq-item.active .faq-answer {
+  display: block;
+}
+
+/* FAQアイテムのアニメーション */
+.faq-answer p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .faq-list {
+    padding: 0 10px;
+  }
+}
+
+/* ── アクセスセクション ── */
+.access.content-section {
+  background-color: #fff;
+  color: #333;
+  padding: 60px 10%;
+  text-align: left;
+}
+
+.access.content-section h2 {
+  font-size: 32px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.access-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.access-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 16px;
+}
+
+.map-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: linear-gradient(90deg, #ff6a9e 0%, #ab3bff 100%);
+  color: #fff;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+}
+
+.map-button:hover {
+  opacity: 0.8;
+}
+
+.map-container {
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .access-grid {
+    grid-template-columns: 1fr;
+  }
+  .access.content-section {
+    text-align: center;
+  }
+  .map-container {
+    margin-top: 20px;
+  }
+}
+
+/* ── お問い合わせ ── */
+.contact {
+  background-color: var(--dark-color);
+  color: white;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.social-links a {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0 1rem;
+  transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--primary-color);
+}
+
+
+
+/* ── フッター ── */
+.site-footer {
+  background-color: #111;
+  color: white;
+  text-align: center;
+  padding: 20px;
+}
+
+.footer-nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-nav a:hover {
+  color: var(--primary-color);
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color); /* 既存の変数を利用 */
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 1.5rem;
+  display: none;  /* 初期は非表示 */
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.back-to-top:hover {
+  background-color: var(--secondary-color);
+}
+
+
+/* ── アニメーション ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ── レスポンシブ共通 ── */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .trainer-box {
+    flex-direction: column;
+    align-items: center;
+  }
+}
